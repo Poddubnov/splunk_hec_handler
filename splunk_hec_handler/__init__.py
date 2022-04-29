@@ -184,7 +184,7 @@ class SplunkHecHandler(logging.Handler):
             # (str, int, float, bool, None) will be skipped instead of raising a TypeError.
             # 'default' - If specified, default should be a function that gets called for objects that can’t otherwise
             # be serialized. It should return a JSON encodable version of the object or raise a TypeError.
-            data = json.dumps(event, sort_keys=True, skipkeys=True, default=self.serializer)
+            data = json.dumps(event, sort_keys=True, skipkeys=True, default=self.serializer, ensure_ascii=False).encode('utf-8')
         except TypeError:
             raise
 
